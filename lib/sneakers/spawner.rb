@@ -13,9 +13,9 @@ module Sneakers
 
       worker_group_config_files.each do |worker_group_config_file|
         unless File.exists?(worker_group_config_file)
-          puts "No worker group file found."
+          puts "#{worker_group_config_file} not found." 
           puts "Specify via ENV 'WORKER_GROUP_CONFIG' or by convention ./config/sneaker_worker_groups.yml"
-          Kernel.exit(1)
+          next
         end
 
         worker_config = YAML.load(ERB.new(File.read(worker_group_config_file)).result)
